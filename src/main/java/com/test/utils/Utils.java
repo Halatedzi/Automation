@@ -4,8 +4,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Properties;
 
 public class Utils {
 
@@ -32,7 +37,7 @@ public class Utils {
                 String absoluteChromeDriverPath = toAbsolutePath(chromeDriverPath);
                 System.setProperty("webdriver.chrome.driver",absoluteChromeDriverPath);
                 ChromeOptions options = new ChromeOptions();
-                options.setExperimentalOption("useAutomationExtention",false);
+                options.setExperimentalOption("useAutomationExtension",false);
                 options.addArguments("--no-sandbox");
 
                 driver = new ChromeDriver(options);
@@ -69,6 +74,23 @@ public class Utils {
         }
 
         return absolutePath.normalize().toString();
+    }
+
+    public String getConfigPropertyValue(String propertyFileName, String propertyName){
+        String value = null;
+
+        try{
+            FileInputStream fileIS = new FileInputStream(new File(propertyFileName));
+            Properties prop = new Properties();
+            prop.load(fileIS);
+
+            value = prop.getProperty(propertyName);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return value;
     }
 
 }

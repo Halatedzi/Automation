@@ -9,20 +9,21 @@ public class GoogleSteps extends Utils {
 
     @Given("the user has launched the browser")
     public void the_user_has_launched_the_browser() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
+        String baseURL = getConfigPropertyValue("./Framework.properties","site");
+        driver.manage().window().maximize();
+        driver.get(baseURL);
+
     }
 
     @When("the user searches {string}")
     public void the_user_searches(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
     }
 
     @Then("the user should see results page")
     public void the_user_should_see_results_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
     }
 
 }
